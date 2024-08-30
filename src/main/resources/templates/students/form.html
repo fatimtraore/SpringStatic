@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter-eleve</title>
+    <link rel="stylesheet" href="../css/eleve/ajouter.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <img th:src="@{../css/icon/etablissement.png}"  style="width: 50px;height: 50px;margin-right: 10px" alt="Mon Etab Logo">
+        <h2>Mon Etab</h2>
+    </div>
+    <ul class="menu">
+        <hr>
+        <li ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-grid-3x2-gap-fill" viewBox="0 0 16 16">
+            <path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+        </svg> <a th:href="@{/home/dashboard}">Tableau de bord</a></li>
+        <li ><a th:href="@{/students}"><img th:src="@{../css/icon/eleve.png}" style="width: 30px;height: 30px" alt="" > Élèves</a></li>
+        <li><a th:href="@{/teachers}"><img th:src="@{../css/icon/professeur.png}" style="width: 30px;height: 30px" alt=""> Professeurs</a></li>
+        <li><a th:href="@{/users}"><img th:src="@{../css/icon/user.png}" style="width: 30px;height: 30px" alt=""> Utilisateurs</a></li>
+        <li class="active"><a th:href="@{/report/rapport}"><img th:src="@{../css/icon/rapport.png}" style="width: 30px;height: 30px" alt=""> Rapport</a></li>
+    </ul>
+    <div class="logout">
+        <hr>
+        <img th:src="@{../css/icon/logout.png}" style="width: 30px;height: 30px" alt="">  <a th:href="@{/}">Déconnexion</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <main>
+        <div class="retour-container">
+            <a th:href="@{/students}">← Retour</a>
+        </div>
+
+        <h2 th:text="${student.id == null} ? 'Ajouter un éleve' : 'Modifier un élève'"></h2>
+        <form th:object="${student}" id="addStudentForm"  th:action="@{/students}" method="post">
+
+            <input hidden type="text" th:field="*{id}">
+            <div class="form-row">
+                <input th:field="*{firstName}" type="text" id="nom" placeholder="Nom" required>
+                <input th:field="*{lastName}" type="text" id="prenom" placeholder="Prénom" required>
+            </div>
+            <div class="form-row">
+                <div class="radio-group">
+                    <label><input th:field="*{genre}" type="radio" name="genre" value="homme" required> Homme</label>
+                    <label><input type="radio" name="genre" value="femme" required> Femme</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <input  th:field="*{matricule}" type="text" id="matricule" placeholder="Matricule" required>
+                <input th:field="*{dateNaissance}" type="date"  id="dateNaissance" required>
+            </div>
+            <div class="form-row">
+                <select th:field="*{classe}" id="classe" required>
+                    <option value="">Sélectionner une classe</option>
+                    <option value="1ere">1ère</option>
+                    <option value="2eme">2ème</option>
+                    <option value="3eme">3ème</option>
+                    <option value="4eme">4ème</option>
+                    <option value="5eme">5ème</option>
+                    <option value="6eme">6ème</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <input th:field="*{telephone}" type="tel" id="telephone" placeholder="Téléphone">
+                <input th:field="*{ville}" type="text" id="ville" placeholder="Ville">
+                <input th:field="*{email}" type="text" id="email" placeholder="email">
+            </div>
+            <div class="form-row buttons">
+                <button type="button" class="btn-cancel">Annuler</button>
+                <button type="submit" class="btn-save">Enregistrer</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script src="../js/Home.js"></script>
+</body>
+</html>

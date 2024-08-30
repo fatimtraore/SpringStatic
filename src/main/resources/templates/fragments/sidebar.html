@@ -1,0 +1,20 @@
+<div class="sidebar" th:fragment="sidebar">
+  <div class="logo">
+    <img th:src="@{css/icon/etablissement.png}"  style="width: 50px;height: 50px;margin-right: 10px" alt="Mon Etab Logo">
+    <h2>Mon Etab</h2>
+  </div>
+  <ul class="menu">
+    <hr>
+    <li ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-grid-3x2-gap-fill" viewBox="0 0 16 16">
+      <path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+    </svg> <a th:href="@{/home}">Tableau de bord</a></li>
+    <li ><a th:href="@{/listereleve}"><img th:src="@{../css/icon/eleve.png}" style="width: 30px;height: 30px" alt="" > Élèves</a></li>
+    <li><a th:href="@{/listerprofesseur}"><img th:src="@{../css/icon/professeur.png}" style="width: 30px;height: 30px" alt=""> Professeurs</a></li>
+    <li><a th:href="@{/listerutilisateur}"><img th:src="@{../css/icon/user.png}" style="width: 30px;height: 30px" alt=""> Utilisateurs</a></li>
+    <li class="active"><a th:href="@{/rapport}"><img th:src="@{css/icon/rapport.png}" style="width: 30px;height: 30px" alt=""> Rapport</a></li>
+  </ul>
+  <div class="logout">
+    <hr>
+    <img th:src="@{css/icon/logout.png}" style="width: 30px;height: 30px" alt="">  <a th:href="@{/logins}">Déconnexion</a>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lister-utilisateur</title>
+    <link rel="stylesheet" href="../css/professeur/lister.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <img th:src="@{../css/icon/etablissement.png}"  style="width: 50px;height: 50px;margin-right: 10px" alt="Mon Etab Logo">
+        <h2>Mon Etab</h2>
+    </div>
+    <ul class="menu">
+        <hr>
+        <li ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-grid-3x2-gap-fill" viewBox="0 0 16 16">
+            <path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+        </svg> <a th:href="@{/home/dashboard}">Tableau de bord</a></li>
+        <li ><a th:href="@{/students}"><img th:src="@{../css/icon/eleve.png}" style="width: 30px;height: 30px" alt="" > Élèves</a></li>
+        <li><a th:href="@{/teachers}"><img th:src="@{../css/icon/professeur.png}" style="width: 30px;height: 30px" alt=""> Professeurs</a></li>
+        <li><a th:href="@{/users}"><img th:src="@{../css/icon/user.png}" style="width: 30px;height: 30px" alt=""> Utilisateurs</a></li>
+        <li class="active"><a th:href="@{/report/rapport}"><img th:src="@{../css/icon/rapport.png}" style="width: 30px;height: 30px" alt=""> Rapport</a></li>
+    </ul>
+    <div class="logout">
+        <hr>
+        <img th:src="@{../css/icon/logout.png}" style="width: 30px;height: 30px" alt="">  <a th:href="@{/}">Déconnexion</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <main>
+        <header>
+            <h1>Utilisateur (<span th:text="${users.size()}"></span>)</h1>
+            <button class="add-student"><img th:src="@{css/icon/plus.png}" style="width: 10px;height: 10px" alt=""><a th:href="@{/users/add}">Nouveau utilisateur</a></button>
+        </header>
+        <section class="table-section">
+            <table>
+                <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Mot de passe</th>
+                    <th>Date de creation</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${users}">
+                    <td th:text="${user.pseudo}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td>[[${#dates.format(user.creationDate, 'dd/MM/yyyy HH:mm:ss')}]]</td>
+                    <td>
+                        <button class="edit-btn"><a th:href="@{/users/{id}(id=${user.id})}">Modifier</a></button>
+                        <button class="delete-btn">Supprimer</button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+</div>
+<!-- Modal de confirmation -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>ATTENTION !!!</h2>
+        </div>
+        <div class="modal-body">
+            <p>Voulez-vous supprimer ce professeur ?</p>
+        </div>
+        <div class="modal-footer">
+            <button id="confirmYes" class="modal-btn yes-btn">Oui</button>
+            <button id="confirmNo" class="modal-btn no-btn">Non</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/css/js/Modal.js}"></script>
+</body>
+</html>

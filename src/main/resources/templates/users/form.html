@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter-Utilisateur</title>
+    <link rel="stylesheet" href="../css/professeur/ajouter.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <img th:src="@{../css/icon/etablissement.png}"  style="width: 50px;height: 50px;margin-right: 10px" alt="Mon Etab Logo">
+        <h2>Mon Etab</h2>
+    </div>
+    <ul class="menu">
+        <hr>
+        <li ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-grid-3x2-gap-fill" viewBox="0 0 16 16">
+            <path d="M1 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+        </svg> <a th:href="@{/home/dashboard}">Tableau de bord</a></li>
+        <li ><a th:href="@{/students}"><img th:src="@{../css/icon/eleve.png}" style="width: 30px;height: 30px" alt="" > Élèves</a></li>
+        <li><a th:href="@{/teachers}"><img th:src="@{../css/icon/professeur.png}" style="width: 30px;height: 30px" alt=""> Professeurs</a></li>
+        <li><a th:href="@{/users/add}"><img th:src="@{../css/icon/user.png}" style="width: 30px;height: 30px" alt=""> Utilisateurs</a></li>
+        <li class="active"><a th:href="@{/report/rapport}"><img th:src="@{../css/icon/rapport.png}" style="width: 30px;height: 30px" alt=""> Rapport</a></li>
+    </ul>
+    <div class="logout">
+        <hr>
+        <img th:src="@{../css/icon/logout.png}" style="width: 30px;height: 30px" alt="">  <a th:href="@{/}">Déconnexion</a>
+    </div>
+</div>
+
+<div class="main-content">
+    <main>
+        <div class="retour-container">
+            <a  th:href="@{/users}" class="retour">← Retour</a>
+        </div>
+        <h2 th:text="${user.id == null} ? 'Ajouter un utilisateur' : 'Modifier un utilisateur'"></h2>
+        <form th:object="${user}" id="addStudentForm" th:action="@{/users}" method="post">
+
+            <input hidden type="text" th:field="*{id}">
+            <div class="form-row">
+                <input th:field="*{pseudo}" type="text" id="pseudo" placeholder="Pseudo" required>
+            </div>
+            <div class="form-row">
+                <input th:field="*{password}" type="password" id="mot de passe" placeholder="Mot de passe" required>
+            </div>
+            <div class="form-row">
+                <input th:field="*{password}" type="password" id="confirmer mot de passe" placeholder="Confirmer mot de passe" required>
+            </div>
+            <div class="form-row">
+                <input th:field="*{creationDate}" type="date" placeholder="Date de creation" required>
+            </div>
+
+            <div class="form-row buttons">
+                <button type="button" class="btn-cancel">Annuler</button>
+                <button type="submit" class="btn-save">Enregistrer</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<script src="../js/Home.js"></script>
+</body>
+</html>
